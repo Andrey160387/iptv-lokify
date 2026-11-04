@@ -2,14 +2,17 @@ from playwright.sync_api import sync_playwright
 import re
 import os
 import requests
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "lokify_playlist.m3u")
 LOG_FILE = os.path.join(SCRIPT_DIR, "lokify_log.txt")
 
+# Московский часовой пояс (UTC+3)
+MOSCOW_TZ = timezone(timedelta(hours=3))
+
 def log(message):
-    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    time = datetime.now(MOSCOW_TZ).strftime("%Y-%m-%d %H:%M:%S")
     msg = f"[{time}] {message}"
     print(msg)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
@@ -66,9 +69,18 @@ def get_lokify_playlist():
     short_url = None
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=[
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--disable-software-rasterizer'
+            ]
+        )
         context = browser.new_context(
-            user_agent="Mozilla/5.0 (Linux; Android 13; HONOR 200) AppleWebKit/537.36",
+            user_agent="Mozilla/5.0 (Linux; Android 13; HONOR 200) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36",
             viewport={"width": 390, "height": 844}
         )
         page = context.new_page()
@@ -177,7 +189,7 @@ def get_lokify_playlist():
     _save_playlist(new_playlist)
 
 def _save_playlist(new_playlist):
-    update_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    update_time = datetime.now(MOSCOW_TZ).strftime("%Y-%m-%d %H:%M:%S")
     old_content = ""
     if os.path.exists(OUTPUT_FILE):
         with open(OUTPUT_FILE, "r", encoding="utf-8-sig") as f:
@@ -211,7 +223,7 @@ def _save_playlist(new_playlist):
     with open(OUTPUT_FILE, "w", encoding="utf-8-sig") as f:
         f.writelines(lines)
     
-    log(f"🕐 Обновлено: {update_time}")
+    log(f"🕐 Обновлено по Москве: {update_time}")
     log(f"💾 Сохранено: {OUTPUT_FILE}")
     log("="*60)
 
