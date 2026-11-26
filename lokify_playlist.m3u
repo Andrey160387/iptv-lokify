@@ -1,5 +1,5 @@
 ﻿#EXTM3U url-tvg="http://epg.rapidnas.org/xmltv/epg.xml.gz" refresh="86400" x-tvg-url="http://epg.rapidnas.org/xmltv/epg.xml" cache=6000 deinterlace=1 audio-track=ru m3uautoload=1 
-#EXTINF:0  tvg-id="elb340"  catchup="flussonic" catchup-days="3" tvg-name="Первый канал HD orig" group-title="Россия (RU)" tvg-logo="https://p.rapidnas.org/img/logos/efir/pervyj.png",🕐 Обновлено (Cloud): 2026-11-25 21:50:45 | 🕐 Обновлено (Cloud): 2026-11-25 06:17:55 | 🕐 Обновлено (Cloud): 2026-11-24 22:42:04 | 🕐 Обновлено (Cloud): 2026-11-24 06:18:42 | Первый канал HD orig
+#EXTINF:0  tvg-id="elb340"  catchup="flussonic" catchup-days="3" tvg-name="Первый канал HD orig" group-title="Россия (RU)" tvg-logo="https://p.rapidnas.org/img/logos/efir/pervyj.png",🕐 Обновлено (Cloud): 2026-11-26 06:17:59 | 🕐 Обновлено (Cloud): 2026-11-25 21:50:45 | 🕐 Обновлено (Cloud): 2026-11-25 06:17:55 | 🕐 Обновлено (Cloud): 2026-11-24 22:42:04 | 🕐 Обновлено (Cloud): 2026-11-24 06:18:42 | Первый канал HD orig
 #EXTGRP:Россия (RU)
 http://cdn.balelbrus.com/bigteisti1/perviy_orig/index.m3u8?token=dXNlcjE5MTEyNjExNDQxN3x8VURNeU1UYzRNVEExZUE9PQ==
 #EXTINF:0  tvg-id="elb341"  catchup="flussonic" catchup-days="3" tvg-name="Первый канал HD" group-title="Россия (RU)" tvg-logo="https://p.rapidnas.org/img/logos/efir/pervyj.png",Первый канал HD
